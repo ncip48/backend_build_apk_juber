@@ -27,8 +27,9 @@ class UploadController extends Controller
                 ]
             ]);
         } else {
+            $client = Client::where('folder', $request->folder)->first();
             Application::create([
-                'name' => $request->name,
+                'name' => $client->name,
                 'client' => $request->client,
                 'type' => $request->type,
                 'version' => $request->version,
@@ -36,7 +37,6 @@ class UploadController extends Controller
                 'file' => $customName,
             ]);
             //update the version of the client
-            $client = Client::where('name', $request->client)->first();
             $client->version = $request->version;
             $client->save();
 
