@@ -33,7 +33,7 @@ class GithubController extends Controller
                 'client' => $input['client'],
                 'type' => $input['type'],
                 'version' => $input['version'],
-                'package' => 'default',
+                'package' => $input['package'],
                 'home' => 'Dari laravel',
             ]
         ];
