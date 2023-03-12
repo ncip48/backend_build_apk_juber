@@ -27,7 +27,7 @@ class UploadController extends Controller
                 ]
             ]);
         } else {
-            $client = Client::where('folder', $request->folder)->first();
+            $client = Client::where('folder', $request->client)->first();
             Application::create([
                 'name' => $client->name,
                 'client' => $request->client,
