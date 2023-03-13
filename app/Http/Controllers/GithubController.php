@@ -27,7 +27,7 @@ class GithubController extends Controller
 
         //make an post request to github to verify the payload
         $payload = [
-            'ref' => 'ci/cd',
+            'ref' => 'FE-oto',
             'inputs' => [
                 'name' => $input['name'],
                 'client' => $input['client'],
