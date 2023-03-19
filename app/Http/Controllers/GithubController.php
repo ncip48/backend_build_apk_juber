@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class GithubController extends Controller
 {
     public function deploy(Request $request)
     {
+        //read input as json
+        $input = json_decode($request->getContent(), true);
+
+        $client = Client::where('username', $input['client'])->first();
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client not found',
+                'data' => []
+            ]);
+        }
+
         $check = self::checkJobs();
 
         $result = json_decode($check->getContent(), true);
@@ -22,15 +36,13 @@ class GithubController extends Controller
                 ]
             ]);
         }
-        //read input as json
-        $input = json_decode($request->getContent(), true);
 
         //make an post request to github to verify the payload
         $payload = [
             'ref' => 'FE-oto',
             'inputs' => [
                 'name' => $input['name'],
-                'client' => $input['client'],
+                'client' => $client->folder,
                 'type' => $input['type'],
                 'version' => $input['version'],
                 'package' => $input['package'],
@@ -99,5 +111,22 @@ class GithubController extends Controller
                 'response' => $status,
             ]
         ]);
+    }
+
+    public function createDownloadLink(Request $request)
+    {
+        $file_path = public_path('uploads/' . $request->file);
+
+        if (file_exists($file_path)) {
+            return response()->download($file_path);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'File not found',
+                'data' => [
+                    'file' => $request->file,
+                ]
+            ]);
+        }
     }
 }
