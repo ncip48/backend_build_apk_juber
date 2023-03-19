@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,36 @@ class GithubController extends Controller
                 'message' => 'Client not found',
                 'data' => []
             ]);
+        }
+
+        $aplikasi = Application::where('client', $client->folder)->orderBy('id', 'desc')->first();
+        //cek versi aplikasi dengan format x.x.xx dan cek jika kurang dari versi itu maka tidak bisa diupload
+        if ($aplikasi) {
+            $versi = explode('.', $aplikasi->version);
+            $versiInput = explode('.', $input['version']);
+            if ($versi[0] > $versiInput[0]) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Versi tidak valid',
+                    'data' => []
+                ]);
+            } elseif ($versi[0] == $versiInput[0]) {
+                if ($versi[1] > $versiInput[1]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak valid',
+                        'data' => []
+                    ]);
+                } elseif ($versi[1] == $versiInput[1]) {
+                    if ($versi[2] >= $versiInput[2]) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Versi tidak valid',
+                            'data' => []
+                        ]);
+                    }
+                }
+            }
         }
 
         $check = self::checkJobs();
