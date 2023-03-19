@@ -76,7 +76,7 @@ return [
     |
     */
 
-    'send_logs_as_events' => true,
+    'send_logs_as_events' => false,
 
     'collect_git_information' => false,
     'reporting' => [
