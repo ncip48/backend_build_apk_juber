@@ -22,12 +22,17 @@ class ClientController extends Controller
             ]);
         }
 
+        $terbaru = Application::where('client', $client->folder)->orderBy('id', 'desc')->first();
+
         $datas = Application::where('client', $client->folder)->get();
 
         return response()->json([
             'success' => true,
             'message' => 'Status',
-            'data' => $datas,
+            'data' => [
+                'terbaru' => $terbaru,
+                'semua' => $datas,
+            ],
         ]);
     }
 
