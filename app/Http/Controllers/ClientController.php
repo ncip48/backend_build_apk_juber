@@ -30,4 +30,25 @@ class ClientController extends Controller
             'data' => $datas,
         ]);
     }
+
+    public function getProfile(Request $request)
+    {
+        $client = $request->client;
+
+        $client = Client::where('username', $client)->first();
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client not found',
+                'data' => []
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status',
+            'data' => $client,
+        ]);
+    }
 }

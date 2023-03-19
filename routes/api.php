@@ -24,3 +24,4 @@ Route::get('check-jobs', 'App\Http\Controllers\GithubController@checkJobs');
 Route::post('deploy', 'App\Http\Controllers\GithubController@deploy');
 
 Route::get('recent-apk/{client}', 'App\Http\Controllers\ClientController@getRecentApk');
+Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile');
