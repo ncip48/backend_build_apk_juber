@@ -56,7 +56,7 @@ class ClientController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Status',
+            'message' => 'Sukses mengambil data',
             'data' => [
                 'client' => $client,
                 'apk' => [
