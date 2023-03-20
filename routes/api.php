@@ -25,3 +25,5 @@ Route::post('deploy', 'App\Http\Controllers\GithubController@deploy');
 
 Route::get('recent-apk/{client}', 'App\Http\Controllers\ClientController@getRecentApk');
 Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile');
+
+Route::get('download/{file}', 'App\Http\Controllers\DownloadController@download');
