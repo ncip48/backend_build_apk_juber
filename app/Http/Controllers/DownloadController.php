@@ -10,7 +10,7 @@ class DownloadController extends Controller
     {
         $file_path = public_path('uploads/' . $request->file);
 
-        if ($file_path) {
+        if (file_exists($file_path)) {
             return response()->download($file_path);
         } else {
             return response()->json([
