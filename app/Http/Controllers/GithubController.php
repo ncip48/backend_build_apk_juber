@@ -37,6 +37,14 @@ class GithubController extends Controller
             }
             if ($aplikasi_apk) {
                 $versi_terbaru = explode('.', $aplikasi_apk->version);
+                //jika sama
+                if ($versi[0] == $versi_terbaru[0] && $versi[1] == $versi_terbaru[1] && $versi[2] == $versi_terbaru[2]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh sama dengan versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
                 if ($versi[0] < $versi_terbaru[0]) {
                     return response()->json([
                         'success' => false,
@@ -70,6 +78,14 @@ class GithubController extends Controller
             }
             if ($aplikasi_aab) {
                 $versi_terbaru = explode('.', $aplikasi_aab->version);
+                //jika sama
+                if ($versi[0] == $versi_terbaru[0] && $versi[1] == $versi_terbaru[1] && $versi[2] == $versi_terbaru[2]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh sama dengan versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
                 if ($versi[0] < $versi_terbaru[0]) {
                     return response()->json([
                         'success' => false,
@@ -93,7 +109,6 @@ class GithubController extends Controller
                 }
             }
         }
-
 
         $check = self::checkJobs();
 
