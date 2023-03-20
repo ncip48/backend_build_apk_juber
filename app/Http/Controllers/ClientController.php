@@ -56,10 +56,14 @@ class ClientController extends Controller
 
         //get link download
 
+        //get the real url
+        $url = $request->getSchemeAndHttpHost();
+        $terbaru->link = $url . '/uploads/' . $terbaru->file;
+
         $terbaru->link = asset('uploads/' . $terbaru->file);
 
-        $datas = $datas->map(function ($item) {
-            $item->link = asset('uploads/' . $item->file);
+        $datas = $datas->map(function ($item) use ($url) {
+            $item->link = $url . '/uploads/' . $item->file;
             return $item;
         });
 
