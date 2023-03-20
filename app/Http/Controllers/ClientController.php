@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class ClientController extends Controller
 {
@@ -58,10 +57,8 @@ class ClientController extends Controller
         //get link download
 
         //get the real url
-        $url = FacadesRequest::url();
+        $url = $request->getSchemeAndHttpHost();
         $terbaru->link = $url . '/uploads/' . $terbaru->file;
-
-        $terbaru->link = asset('uploads/' . $terbaru->file);
 
         $datas = $datas->map(function ($item) use ($url) {
             $item->link = $url . '/uploads/' . $item->file;
