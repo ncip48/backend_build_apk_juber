@@ -54,6 +54,15 @@ class ClientController extends Controller
 
         $datas = Application::where('client', $client->folder)->get();
 
+        //get link download
+
+        $terbaru->link = asset('uploads/' . $terbaru->file);
+
+        $datas = $datas->map(function ($item) {
+            $item->link = asset('uploads/' . $item->file);
+            return $item;
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengambil data',
