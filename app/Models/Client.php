@@ -14,6 +14,7 @@ class Client extends Model
         'username',
         'password',
         'version',
+        'version_aab',
         'package',
         'folder'
     ];

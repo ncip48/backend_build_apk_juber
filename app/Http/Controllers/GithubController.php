@@ -23,35 +23,77 @@ class GithubController extends Controller
             ]);
         }
 
-        $aplikasi = Application::where('client', $client->folder)->orderBy('id', 'desc')->first();
+        $aplikasi_apk = Application::where('client', $client->folder)->where('type', 'apk')->orderBy('id', 'desc')->first();
+        $aplikasi_aab = Application::where('client', $client->folder)->where('type', 'aab')->orderBy('id', 'desc')->first();
         //cek versi aplikasi dengan format x.x.xx dan cek jika kurang dari versi itu maka tidak bisa diupload
-        if ($aplikasi) {
-            $versi = explode('.', $aplikasi->version);
-            $versiInput = explode('.', $input['version']);
-            if ($versi[0] > $versiInput[0]) {
+        if ($input['type'] == 'apk') {
+            $versi = explode('.', $input['version']);
+            if (count($versi) != 3) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Versi tidak valid',
+                    'message' => 'Format versi salah',
                     'data' => []
                 ]);
-            } elseif ($versi[0] == $versiInput[0]) {
-                if ($versi[1] > $versiInput[1]) {
+            }
+            if ($aplikasi_apk) {
+                $versi_terbaru = explode('.', $aplikasi_apk->version);
+                if ($versi[0] < $versi_terbaru[0]) {
                     return response()->json([
                         'success' => false,
-                        'message' => 'Versi tidak valid',
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
                         'data' => []
                     ]);
-                } elseif ($versi[1] == $versiInput[1]) {
-                    if ($versi[2] >= $versiInput[2]) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Versi tidak valid',
-                            'data' => []
-                        ]);
-                    }
+                }
+                if ($versi[1] < $versi_terbaru[1]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
+                if ($versi[2] < $versi_terbaru[2]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
+            }
+        } else {
+            $versi = explode('.', $input['version']);
+            if (count($versi) != 3) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Format versi salah',
+                    'data' => []
+                ]);
+            }
+            if ($aplikasi_aab) {
+                $versi_terbaru = explode('.', $aplikasi_aab->version);
+                if ($versi[0] < $versi_terbaru[0]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
+                if ($versi[1] < $versi_terbaru[1]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
+                        'data' => []
+                    ]);
+                }
+                if ($versi[2] < $versi_terbaru[2]) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Versi tidak boleh lebih kecil dari versi sebelumnya',
+                        'data' => []
+                    ]);
                 }
             }
         }
+
 
         $check = self::checkJobs();
 

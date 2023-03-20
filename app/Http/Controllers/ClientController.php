@@ -50,7 +50,8 @@ class ClientController extends Controller
             ]);
         }
 
-        $terbaru = Application::where('client', $client->folder)->orderBy('id', 'desc')->first();
+        $terbaru_apk = Application::where('client', $client->folder)->where('type', 'apk')->orderBy('id', 'desc')->first();
+        $terbaru_aab = Application::where('client', $client->folder)->where('type', 'aab')->orderBy('id', 'desc')->first();
 
         $datas = Application::where('client', $client->folder)->get();
 
@@ -58,7 +59,8 @@ class ClientController extends Controller
 
         //get the real url
         $url = "https://apps-build.berkah-ts.my.id";
-        $terbaru->link = $url . '/uploads/' . $terbaru->file;
+        $terbaru_apk->link = $url . '/uploads/' . $terbaru_apk->file;
+        $terbaru_aab->link = $url . '/uploads/' . $terbaru_aab->file;
 
         $datas = $datas->map(function ($item) use ($url) {
             $item->link = $url . '/uploads/' . $item->file;
@@ -71,7 +73,10 @@ class ClientController extends Controller
             'data' => [
                 'client' => $client,
                 'apk' => [
-                    'terbaru' => $terbaru,
+                    'terbaru' => [
+                        'apk' => $terbaru_apk,
+                        'aab' => $terbaru_aab,
+                    ],
                     'semua' => $datas,
                 ]
             ],

@@ -37,7 +37,11 @@ class UploadController extends Controller
                 'file' => $customName,
             ]);
             //update the version of the client
-            $client->version = $request->version;
+            if ($request->type == 'apk') {
+                $client->version = $request->version;
+            } else {
+                $client->version_aab = $request->version;
+            }
             $client->save();
 
             return response()->json([
