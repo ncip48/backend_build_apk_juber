@@ -57,7 +57,7 @@ class ClientController extends Controller
         //get link download
 
         //get the real url
-        $url = $request->getSchemeAndHttpHost();
+        $url = "https://apps-build.berkah-ts.my.id";
         $terbaru->link = $url . '/uploads/' . $terbaru->file;
 
         $datas = $datas->map(function ($item) use ($url) {
