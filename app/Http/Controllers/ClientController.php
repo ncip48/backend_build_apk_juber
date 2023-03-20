@@ -59,8 +59,6 @@ class ClientController extends Controller
 
         //get the real url
         $url = "https://apps-build.berkah-ts.my.id";
-        $terbaru_apk->link = $url . '/uploads/' . $terbaru_apk->file;
-        $terbaru_aab->link = $url . '/uploads/' . $terbaru_aab->file;
 
         $datas = $datas->map(function ($item) use ($url) {
             $item->link = $url . '/uploads/' . $item->file;
