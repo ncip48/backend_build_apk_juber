@@ -134,6 +134,8 @@ class ClientController extends Controller
         //all input json
         Client::where('username', $username)->update($input);
 
+        $client = Client::where('username', $username)->first();
+
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengubah client',
