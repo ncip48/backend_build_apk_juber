@@ -29,3 +29,5 @@ Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile
 Route::get('download/{file}', 'App\Http\Controllers\DownloadController@download');
 
 Route::get('clients', 'App\Http\Controllers\ClientController@getClients');
+Route::post('client', 'App\Http\Controllers\ClientController@createClient');
+Route::patch('client/{username}', 'App\Http\Controllers\ClientController@editClient');

@@ -91,4 +91,53 @@ class ClientController extends Controller
             'data' => $clients,
         ]);
     }
+
+    public function createClient(Request $request)
+    {
+        //retrieve json data
+        $input = json_decode($request->getContent(), true);
+
+        $client = Client::where('username', $input['username'])->first();
+
+        if ($client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client sudah ada',
+                'data' => []
+            ]);
+        }
+
+        Client::create($input);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses membuat client',
+            'data' => $client,
+        ]);
+    }
+
+    public function editClient(Request $request, $username)
+    {
+        //retrieve json data
+        $input = json_decode($request->getContent(), true);
+
+        $client = Client::where('username', $username)->first();
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client tidak ditemukan',
+                'data' => []
+            ]);
+        }
+
+        //all input json
+        Client::where('username', $username)->update($input);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses mengubah client',
+            'data' => $client,
+        ]);
+    }
 }
