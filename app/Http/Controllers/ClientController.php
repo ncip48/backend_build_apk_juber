@@ -107,7 +107,7 @@ class ClientController extends Controller
             ]);
         }
 
-        Client::create($input);
+        $client = Client::create($input);
 
         return response()->json([
             'success' => true,
@@ -137,6 +137,29 @@ class ClientController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengubah client',
+            'data' => $client,
+        ]);
+    }
+
+    public function deleteClient($username)
+    {
+        $client = Client::where('username', $username)->first();
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client tidak ditemukan',
+                'data' => []
+            ]);
+        }
+
+        Client::where('username', $username)->delete();
+
+        $client = Client::all();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses menghapus client',
             'data' => $client,
         ]);
     }
