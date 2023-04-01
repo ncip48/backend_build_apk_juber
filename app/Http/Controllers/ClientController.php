@@ -80,4 +80,15 @@ class ClientController extends Controller
             ],
         ]);
     }
+
+    public function getClients()
+    {
+        $clients = Client::all();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses mengambil data',
+            'data' => $clients,
+        ]);
+    }
 }
