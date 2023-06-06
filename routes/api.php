@@ -32,3 +32,6 @@ Route::get('clients', 'App\Http\Controllers\ClientController@getClients');
 Route::post('client', 'App\Http\Controllers\ClientController@createClient');
 Route::patch('client/{username}', 'App\Http\Controllers\ClientController@editClient');
 Route::delete('client/{username}', 'App\Http\Controllers\ClientController@deleteClient');
+
+Route::get('splashscreen', 'App\Http\Controllers\SplashController@getSplash');
+Route::post('splashscreen', 'App\Http\Controllers\SplashController@createSplash');
