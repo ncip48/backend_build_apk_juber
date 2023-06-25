@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class DownloadController extends Controller
@@ -34,7 +35,8 @@ class DownloadController extends Controller
         $client = $request->client;
         $url = "https://apps-build.berkah-ts.my.id";
 
-        $application = Application::where('client', $client)->where('type', 'apk')->first();
+        $client = Client::where('username', $client)->first();
+        $application = Application::where('client', $client->folder)->where('type', 'apk')->first();
 
         if ($application) {
             return response()->json([
