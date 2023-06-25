@@ -43,6 +43,7 @@ class DownloadController extends Controller
                 'success' => true,
                 'message' => 'File ditemukan!',
                 'data' => [
+                    'application' => $application,
                     'file' => $url . '/uploads/' . $application->file
                 ]
             ]);
