@@ -36,7 +36,7 @@ class DownloadController extends Controller
         $url = "https://apps-build.berkah-ts.my.id";
 
         $client = Client::where('username', $client)->first();
-        $application = Application::where('client', $client->folder)->where('type', 'apk')->first();
+        $application = Application::where('client', $client->folder)->where('type', 'apk')->orderBy('id', 'desc')->first();
 
         if ($application) {
             return response()->json([
