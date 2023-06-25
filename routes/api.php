@@ -27,6 +27,7 @@ Route::get('recent-apk/{client}', 'App\Http\Controllers\ClientController@getRece
 Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile');
 
 Route::get('download/{file}', 'App\Http\Controllers\DownloadController@download');
+Route::get('download/client/{client}', 'App\Http\Controllers\DownloadController@downloadClient');
 
 Route::get('clients', 'App\Http\Controllers\ClientController@getClients');
 Route::post('client', 'App\Http\Controllers\ClientController@createClient');
