@@ -199,6 +199,7 @@ class ClientController extends Controller
             //update client icon
             Client::where('username', $request->client)->update([
                 'icon' => $icon_name,
+                'name' => $request->name,
             ]);
         }
 
