@@ -36,3 +36,5 @@ Route::delete('client/{username}', 'App\Http\Controllers\ClientController@delete
 
 Route::get('splashscreen', 'App\Http\Controllers\SplashController@getSplash');
 Route::post('splashscreen', 'App\Http\Controllers\SplashController@createSplash');
+
+Route::post('icon', 'App\Http\Controllers\ClientController@changeIcon');

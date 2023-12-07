@@ -65,6 +65,12 @@ class ClientController extends Controller
             return $item;
         });
 
+        if ($client->icon) {
+            $client->icon = $url . '/icons/' . $client->icon;
+        } else {
+            $client->icon = null;
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengambil data',
@@ -162,6 +168,43 @@ class ClientController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Sukses menghapus client',
+            'data' => $client,
+        ]);
+    }
+
+    public function changeIcon(Request $request)
+    {
+
+        $client = Client::where('username', $request->client)->first();
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Client tidak ditemukan',
+                'data' => []
+            ]);
+        }
+
+        if ($request->has('icon')) {
+
+            //if client already has icon, delete it
+            if ($client->icon) {
+                unlink(public_path() . '/icons/' . $client->icon);
+            }
+
+            $icon_name = time() . '_' . rand(1000, 9999) . '.png';
+            $icon = $request->file('icon');
+            $icon->move(public_path() . '/icons/', $icon_name);
+
+            //update client icon
+            Client::where('username', $request->client)->update([
+                'icon' => $icon_name,
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sukses mengubah icon',
             'data' => $client,
         ]);
     }
