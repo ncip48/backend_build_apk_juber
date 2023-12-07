@@ -130,6 +130,7 @@ class GithubController extends Controller
             'ref' => 'FE-oto',
             'inputs' => [
                 'name' => $input['name'],
+                'icon' => $input['icon'] ?? null,
                 'client' => $client->folder,
                 'type' => $input['type'],
                 'version' => $input['version'],
