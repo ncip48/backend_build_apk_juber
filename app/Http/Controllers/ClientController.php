@@ -185,23 +185,25 @@ class ClientController extends Controller
             ]);
         }
 
-        if ($request->has('icon')) {
 
-            //if client already has icon, delete it
+        //if client already has icon, delete it
+        if ($request->has('icon')) {
             if ($client->icon) {
                 unlink(public_path() . '/icons/' . $client->icon);
             }
-
-            $icon_name = time() . '_' . rand(1000, 9999) . '.png';
-            $icon = $request->file('icon');
-            $icon->move(public_path() . '/icons/', $icon_name);
-
-            //update client icon
-            Client::where('username', $request->client)->update([
-                'icon' => $icon_name,
-                'name' => $request->name,
-            ]);
         }
+
+        $icon_name = time() . '_' . rand(1000, 9999) . '.png';
+        $icon = $request->file('icon');
+        $icon->move(public_path() . '/icons/', $icon_name);
+
+        $client = Client::where('username', $request->client)->first();
+        //update client icon
+        Client::where('username', $request->client)->update([
+            'icon' => $request->has('icon') ? $icon_name : $client->icon,
+            'name' => $request->name,
+        ]);
+
 
         return response()->json([
             'success' => true,
