@@ -191,11 +191,10 @@ class ClientController extends Controller
             if ($client->icon) {
                 unlink(public_path() . '/icons/' . $client->icon);
             }
+            $icon_name = time() . '_' . rand(1000, 9999) . '.png';
+            $icon = $request->file('icon');
+            $icon->move(public_path() . '/icons/', $icon_name);
         }
-
-        $icon_name = time() . '_' . rand(1000, 9999) . '.png';
-        $icon = $request->file('icon');
-        $icon->move(public_path() . '/icons/', $icon_name);
 
         $client = Client::where('username', $request->client)->first();
         //update client icon
