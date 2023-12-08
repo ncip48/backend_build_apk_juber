@@ -203,6 +203,8 @@ class ClientController extends Controller
             'name' => $request->name,
         ]);
 
+        $client = Client::where('username', $request->client)->first();
+        $client->icon = 'https://apps-build.berkah-ts.my.id/icons/' . $client->icon;
 
         return response()->json([
             'success' => true,
