@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -176,15 +177,21 @@ class ClientController extends Controller
     {
 
         //validasi icon harus berupa png dan nullable
-        $request->validate([
+        $rules = [
             'icon' => 'nullable|mimes:png',
-        ]);
+        ];
+
+        $message = [
+            'icon.mimes' => 'Icon harus berupa png',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
 
         //check validation
-        if ($request->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Icon harus berupa png',
+                'message' => $validator->errors()->first(),
                 'data' => []
             ]);
         }
