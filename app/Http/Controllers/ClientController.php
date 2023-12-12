@@ -175,6 +175,20 @@ class ClientController extends Controller
     public function changeIcon(Request $request)
     {
 
+        //validasi icon harus berupa png dan nullable
+        $request->validate([
+            'icon' => 'nullable|mimes:png',
+        ]);
+
+        //check validation
+        if ($request->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Icon harus berupa png',
+                'data' => []
+            ]);
+        }
+
         $client = Client::where('username', $request->client)->first();
 
         if (!$client) {
