@@ -92,6 +92,15 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
+        //only show username, folder and name
+        $clients = $clients->map(function ($item) {
+            return [
+                'username' => $item->username,
+                'folder' => $item->folder,
+                'name' => $item->name,
+            ];
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengambil data',
