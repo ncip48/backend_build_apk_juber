@@ -92,13 +92,10 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
-        //only show username, folder and name
+        //remove password object
         $clients = $clients->map(function ($item) {
-            return [
-                'username' => $item->username,
-                'folder' => $item->folder,
-                'name' => $item->name,
-            ];
+            unset($item->password);
+            return $item;
         });
 
         return response()->json([
