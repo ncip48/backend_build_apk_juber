@@ -50,11 +50,20 @@ class NotificationController extends Controller
         $client = Client::where('username', $client)->first();
 
         if ($client) {
-            Notification::create([
-                'client_id' => $client->id,
-                'version' => $version,
-                'status' => $status,
-            ]);
+
+            $check = Notification::where('client_id', $client->id)->where('version', $version)->first();
+            if ($check) {
+                //update status
+                Notification::where('client_id', $client->id)->where('version', $version)->update([
+                    'status' => $status
+                ]);
+            } else {
+                Notification::create([
+                    'client_id' => $client->id,
+                    'version' => $version,
+                    'status' => $status,
+                ]);
+            }
             return response()->json(['message' => 'Notification sent'], 200);
         } else {
             return response()->json(['message' => 'Client not found'], 404);
