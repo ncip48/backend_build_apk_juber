@@ -46,12 +46,13 @@ class NotificationController extends Controller
         $client = $request->client;
         $version = $request->version;
         $status = $request->status;
+        $type = $request->type;
 
         $client = Client::where('username', $client)->first();
 
         if ($client) {
 
-            $check = Notification::where('client_id', $client->id)->where('version', $version)->first();
+            $check = Notification::where('client_id', $client->id)->where('version', $version)->where('type', $type)->first();
             if ($check) {
                 //update status
                 Notification::where('client_id', $client->id)->where('version', $version)->update([
@@ -62,6 +63,7 @@ class NotificationController extends Controller
                     'client_id' => $client->id,
                     'version' => $version,
                     'status' => $status,
+                    'type' => $type
                 ]);
             }
             return response()->json(['message' => 'Notification sent'], 200);
