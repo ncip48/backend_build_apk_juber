@@ -38,3 +38,7 @@ Route::get('splashscreen', 'App\Http\Controllers\SplashController@getSplash');
 Route::post('splashscreen', 'App\Http\Controllers\SplashController@createSplash');
 
 Route::post('icon', 'App\Http\Controllers\ClientController@changeIcon');
+
+Route::get('notifications/{client}', 'App\Http\Controllers\NotificationController@all');
+Route::get('notification/{client}', 'App\Http\Controllers\NotificationController@index');
+Route::post('notification', 'App\Http\Controllers\NotificationController@create');
