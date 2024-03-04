@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Client;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class GithubController extends Controller
@@ -157,6 +158,13 @@ class GithubController extends Controller
         $response = curl_exec($ch);
 
         curl_close($ch);
+
+        Notification::create([
+            'client_id' => $client->id,
+            'version' => $input['version'],
+            'status' => '0',
+            'type' => $input['type']
+        ]);
 
         return response()->json([
             'success' => true,
