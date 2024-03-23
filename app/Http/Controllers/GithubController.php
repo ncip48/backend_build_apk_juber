@@ -139,7 +139,8 @@ class GithubController extends Controller
                 'home' => 'Dari laravel',
             ]
         ];
-        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/50803826/dispatches');
+        // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/50803826/dispatches');
+        $ch = curl_init('https://api.github.com/repos/ncip48/juber.backup/actions/workflows/manual.yml/dispatches');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -178,7 +179,8 @@ class GithubController extends Controller
     public function checkJobs()
     {
 
-        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
+        // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
+        $ch = curl_init('https://api.github.com/repos/ncip48/juber.backup/actions/runs');
 
         //get
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
