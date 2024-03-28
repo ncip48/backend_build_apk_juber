@@ -98,6 +98,16 @@ class ClientController extends Controller
             return $item;
         });
 
+        $clients = $clients->map(function ($item) {
+            $terbaru_apk = Application::where('client', $item->folder)->where('type', 'apk')->orderBy('id', 'desc')->first();
+            $terbaru_aab = Application::where('client', $item->folder)->where('type', 'aab')->orderBy('id', 'desc')->first();
+
+            $item['latest_apk'] = $terbaru_apk;
+            $item['latest_aab'] = $terbaru_aab;
+
+            return $item;
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Sukses mengambil data',
