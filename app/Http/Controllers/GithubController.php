@@ -140,7 +140,7 @@ class GithubController extends Controller
             ]
         ];
         // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/50803826/dispatches');
-        $ch = curl_init('https://api.github.com/repos/BerkahTeknoSolution/juber.superatps/actions/workflows/manual.yml/dispatches');
+        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/manual.yml/dispatches');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -180,7 +180,7 @@ class GithubController extends Controller
     {
 
         // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
-        $ch = curl_init('https://api.github.com/repos/BerkahTeknoSolution/juber.superatps/actions/runs');
+        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
 
         //get
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
