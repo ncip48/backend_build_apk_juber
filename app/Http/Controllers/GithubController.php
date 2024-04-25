@@ -169,7 +169,7 @@ class GithubController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Deployed. Silahkan tunggu kurang lebih 15 menit untuk proses selesai. Link terbaru akan muncul di bawah ini',
+            'message' => 'Deployed. Silahkan tunggu kurang lebih 25 - 40 menit untuk proses selesai. Link terbaru akan muncul di bawah ini',
             'data' => [
                 'response' => $response,
             ]
