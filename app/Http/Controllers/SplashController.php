@@ -17,7 +17,7 @@ class SplashController extends Controller
                 'success' => true,
                 'message' => 'Splashscreen ditemukan!',
                 'data' => [
-                    'splashscreen' => 'https://apps-build.berkah-ts.my.id/splashscreen/' . $username . '.jpg'
+                    'splashscreen' => 'https://app.build.berkah-ts.my.id/splashscreen/' . $username . '.jpg'
                 ]
             ]);
         } else {
