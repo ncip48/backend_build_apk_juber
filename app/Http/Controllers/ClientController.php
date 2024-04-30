@@ -67,7 +67,7 @@ class ClientController extends Controller
         });
 
         if ($client->icon) {
-            $client->icon = $url . '/icons/' . $client->icon;
+            $client->icon = $url . '/public/icons/' . $client->icon;
         } else {
             $client->icon = null;
         }
@@ -241,7 +241,7 @@ class ClientController extends Controller
         ]);
 
         $client = Client::where('username', $request->client)->first();
-        $client->icon = 'https://app.build.berkah-ts.my.id/icons/' . $client->icon;
+        $client->icon = 'https://app.build.berkah-ts.my.id/public/icons/' . $client->icon;
 
         return response()->json([
             'success' => true,
