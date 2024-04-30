@@ -10,7 +10,7 @@ class DownloadController extends Controller
 {
     public function download(Request $request)
     {
-        $url = "https://apps-build.berkah-ts.my.id";
+        $url = "https://app.build.berkah-ts.my.id";
         $file_path = public_path('uploads/' . $request->file);
 
         if (file_exists($file_path)) {
@@ -33,7 +33,7 @@ class DownloadController extends Controller
     public function downloadClient(Request $request)
     {
         $client = $request->client;
-        $url = "https://apps-build.berkah-ts.my.id";
+        $url = "https://app.build.berkah-ts.my.id";
 
         $client = Client::where('username', $client)->first();
         $application = Application::where('client', $client->folder)->where('type', 'apk')->orderBy('id', 'desc')->first();

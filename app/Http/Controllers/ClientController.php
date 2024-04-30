@@ -59,7 +59,7 @@ class ClientController extends Controller
         //get link download
 
         //get the real url
-        $url = "https://apps-build.berkah-ts.my.id";
+        $url = "https://app.build.berkah-ts.my.id";
 
         $datas = $datas->map(function ($item) use ($url) {
             $item->link = $url . '/uploads/' . $item->file;
@@ -241,7 +241,7 @@ class ClientController extends Controller
         ]);
 
         $client = Client::where('username', $request->client)->first();
-        $client->icon = 'https://apps-build.berkah-ts.my.id/icons/' . $client->icon;
+        $client->icon = 'https://app.build.berkah-ts.my.id/icons/' . $client->icon;
 
         return response()->json([
             'success' => true,
