@@ -187,7 +187,7 @@ class GithubController extends Controller
         curl_setopt($ch, CURLOPT_HTTPGET, true);
 
         //set your github token here
-        $token = "Bearer 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";
+        $token = "Bearer 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";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
