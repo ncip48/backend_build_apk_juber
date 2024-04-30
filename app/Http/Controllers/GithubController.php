@@ -147,7 +147,7 @@ class GithubController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
         //set your github token here
-        $token = "Bearer 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";
+        $token = "Bearer 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";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
@@ -187,7 +187,7 @@ class GithubController extends Controller
         curl_setopt($ch, CURLOPT_HTTPGET, true);
 
         //set your github token here
-        $token = "Bearer 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";
+        $token = "Bearer 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";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
