@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'v10.0.4',
-        'version' => '10.0.4.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '1284b70418b85488ce8a034b54e4823affe2f983',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -371,9 +371,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v10.0.4',
-            'version' => '10.0.4.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '1284b70418b85488ce8a034b54e4823affe2f983',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -628,6 +628,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'pion/laravel-chunk-upload' => array(
+            'pretty_version' => 'v1.5.4',
+            'version' => '1.5.4.0',
+            'reference' => 'cfbc4292ddcace51308a4f2f446d310aa04e6133',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../pion/laravel-chunk-upload',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'psr/container' => array(
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
@@ -715,8 +724,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

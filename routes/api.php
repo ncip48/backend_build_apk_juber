@@ -43,4 +43,6 @@ Route::middleware(['cors'])->group(function () {
     Route::get('notifications/{client}', 'App\Http\Controllers\NotificationController@all');
     Route::get('notification/{client}', 'App\Http\Controllers\NotificationController@index');
     Route::post('notification', 'App\Http\Controllers\NotificationController@create');
+
+    Route::post('v2/upload', 'App\Http\Controllers\UploadController@uploadLargeFiles');
 });
