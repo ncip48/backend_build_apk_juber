@@ -79,13 +79,13 @@ class UploadController extends Controller
             $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName()); //file name without extenstion
             $fileName .= '_' . uniqid() . '.' . $extension; // a unique file name
 
-            $disk = Storage::disk(config('filesystems.default'));
-            $path = $disk->putFileAs('public/uploads', $file, $fileName);
+            // $disk = Storage::disk(config('filesystems.default'));
+            // $path = $disk->putFileAs('public/uploads', $file, $fileName);
 
             // $f = storage_path('upload/' . $fileName);
 
             //move storage/app/upload/$fileName to public/uploads
-            // $upload = $f->move(public_path('uploads'), $fileName);
+            $upload = $file->move(public_path('uploads'), $fileName);
             // File::move($f, public_path('uploads/' . $fileName));
 
             // delete chunked file
