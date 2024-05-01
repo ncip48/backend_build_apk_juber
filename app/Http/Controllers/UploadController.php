@@ -89,7 +89,7 @@ class UploadController extends Controller
             // File::move($f, public_path('uploads/' . $fileName));
 
             // delete chunked file
-            unlink($file->getPathname());
+            // unlink($file->getPathname());
             return response()->json([
                 'success' => true,
                 'message' => 'File uploaded',
