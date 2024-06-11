@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Client;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class GithubController extends Controller
@@ -138,14 +139,15 @@ class GithubController extends Controller
                 'home' => 'Dari laravel',
             ]
         ];
-        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/50803826/dispatches');
+        // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/50803826/dispatches');
+        $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/workflows/manual.yml/dispatches');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
         //set your github token here
-        $token = "Bearer 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";
+        $token = "TOKEN";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
@@ -158,9 +160,16 @@ class GithubController extends Controller
 
         curl_close($ch);
 
+        Notification::create([
+            'client_id' => $client->id,
+            'version' => $input['version'],
+            'status' => '0',
+            'type' => $input['type']
+        ]);
+
         return response()->json([
             'success' => true,
-            'message' => 'Deployed. Silahkan tunggu kurang lebih 15 menit untuk proses selesai. Link terbaru akan muncul di bawah ini',
+            'message' => 'Deployed. Silahkan tunggu kurang lebih 25 - 40 menit untuk proses selesai. Link terbaru akan muncul di bawah ini',
             'data' => [
                 'response' => $response,
             ]
@@ -170,6 +179,7 @@ class GithubController extends Controller
     public function checkJobs()
     {
 
+        // $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
         $ch = curl_init('https://api.github.com/repos/jubercoding/juber.superatps/actions/runs');
 
         //get
@@ -177,7 +187,7 @@ class GithubController extends Controller
         curl_setopt($ch, CURLOPT_HTTPGET, true);
 
         //set your github token here
-        $token = "Bearer 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";
+        $token = "TOKEN";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',

@@ -18,24 +18,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('upload', 'App\Http\Controllers\UploadController@upload');
-Route::post('generate_application', 'App\Http\Controllers\UploadController@generate_application');
-Route::get('check-jobs', 'App\Http\Controllers\GithubController@checkJobs');
+Route::middleware(['cors'])->group(function () {
+    Route::post('generate_application', 'App\Http\Controllers\UploadController@generate_application');
+    Route::post('upload', 'App\Http\Controllers\UploadController@upload');
+    Route::get('check-jobs', 'App\Http\Controllers\GithubController@checkJobs');
 
-Route::post('deploy', 'App\Http\Controllers\GithubController@deploy');
+    Route::post('deploy', 'App\Http\Controllers\GithubController@deploy');
 
-Route::get('recent-apk/{client}', 'App\Http\Controllers\ClientController@getRecentApk');
-Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile');
+    Route::get('recent-apk/{client}', 'App\Http\Controllers\ClientController@getRecentApk');
+    Route::get('profile/{client}', 'App\Http\Controllers\ClientController@getProfile');
 
-Route::get('download/{file}', 'App\Http\Controllers\DownloadController@download');
-Route::get('download/client/{client}', 'App\Http\Controllers\DownloadController@downloadClient');
+    Route::get('download/{file}', 'App\Http\Controllers\DownloadController@download');
+    Route::get('download/client/{client}', 'App\Http\Controllers\DownloadController@downloadClient');
 
-Route::get('clients', 'App\Http\Controllers\ClientController@getClients');
-Route::post('client', 'App\Http\Controllers\ClientController@createClient');
-Route::patch('client/{username}', 'App\Http\Controllers\ClientController@editClient');
-Route::delete('client/{username}', 'App\Http\Controllers\ClientController@deleteClient');
+    Route::get('clients', 'App\Http\Controllers\ClientController@getClients');
+    Route::post('client', 'App\Http\Controllers\ClientController@createClient');
+    Route::patch('client/{username}', 'App\Http\Controllers\ClientController@editClient');
+    Route::delete('client/{username}', 'App\Http\Controllers\ClientController@deleteClient');
 
-Route::get('splashscreen', 'App\Http\Controllers\SplashController@getSplash');
-Route::post('splashscreen', 'App\Http\Controllers\SplashController@createSplash');
+    Route::get('splashscreen', 'App\Http\Controllers\SplashController@getSplash');
+    Route::post('splashscreen', 'App\Http\Controllers\SplashController@createSplash');
 
-Route::post('icon', 'App\Http\Controllers\ClientController@changeIcon');
+    Route::post('icon', 'App\Http\Controllers\ClientController@changeIcon');
+
+    Route::get('notifications/{client}', 'App\Http\Controllers\NotificationController@all');
+    Route::get('notification/{client}', 'App\Http\Controllers\NotificationController@index');
+    Route::post('notification', 'App\Http\Controllers\NotificationController@create');
+
+    Route::post('v2/upload', 'App\Http\Controllers\UploadController@uploadLargeFiles');
+});
