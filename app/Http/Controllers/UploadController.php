@@ -54,4 +54,33 @@ class UploadController extends Controller
             ]);
         }
     }
+
+    public function generate_application(Request $request)
+    {
+        $client = Client::where('folder', $request->client)->first();
+        Application::create([
+            'name' => $client->name,
+            'client' => $request->client,
+            'type' => $request->type,
+            'version' => $request->version,
+            'package' => $request->package,
+            'file' => $request->file,
+        ]);
+        //update the version of the client
+        if ($request->type == 'apk') {
+            $client->version = $request->version;
+        } else {
+            $client->version_aab = $request->version;
+        }
+        $client->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'File uploaded',
+            'data' => [
+                'filename' => $request->file,
+                'customName' => $request->file
+            ]
+        ]);
+    }
 }

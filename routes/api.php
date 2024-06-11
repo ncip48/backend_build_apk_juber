@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('upload', 'App\Http\Controllers\UploadController@upload');
+Route::post('generate_application', 'App\Http\Controllers\UploadController@generate_application');
 Route::get('check-jobs', 'App\Http\Controllers\GithubController@checkJobs');
 
 Route::post('deploy', 'App\Http\Controllers\GithubController@deploy');
